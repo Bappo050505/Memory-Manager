@@ -23,6 +23,7 @@ public:
 	~MemoryManager();
 
 	void* AllocateMemory(size_t size);
-	void DeallocateMemory();
+	void DeallocateMemory(void* del);
+	void Output();
 };
 
