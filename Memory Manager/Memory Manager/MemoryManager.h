@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 
+
 typedef char byte;
 class MemoryManager
 {
@@ -16,6 +17,8 @@ private:
 
 	MetaData* head = nullptr;
 	MetaData* tail = nullptr;
+	size_t MetaDataSize;
+	size_t MemoryRem;
 
 	void* address;
 public:
