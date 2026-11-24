@@ -76,6 +76,21 @@ void Testing::StressTest()
 }
 void Testing::TestComplex()
 {
+	STARTTIMER
+	mem = new MemoryManager(2048);
+
+	void* test1 = mem->AllocateMemory(100);
+	Dog* dog = new(test1) Dog("Barry" , "PitBull" , 4 , 10);
+	dog->info();
+
+	mem->Output();
+	mem->DeallocateMemory(test1);
+	ENDTIMER
+	std::cout << "Time Elapsed For Complex Value Test:" << (EndTime - StartTime) << "\n";
+
+	delete mem;
+	
+
 }
 ;
 
