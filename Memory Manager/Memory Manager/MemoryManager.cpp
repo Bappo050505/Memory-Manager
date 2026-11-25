@@ -4,7 +4,7 @@ MemoryManager::MemoryManager(size_t size)
 {
 	address = malloc(size);
     MemoryRem = size;
-    MetaDataSize = sizeof(MetaData);
+    
 }
 
 MemoryManager::~MemoryManager()
@@ -20,12 +20,10 @@ void* MemoryManager::AllocateMemory(size_t size)
 {
     if (!((int)size > 0)) 
     {
-        std::cout << "ERROR:can not allocate a negative value or zero to memory\n";
         return 0;
     }
     if (size > MemoryRem)
     {
-        std::cout << "ERROR:not enought memory to allocate to\n";
         return 0;
     }
 
@@ -39,17 +37,21 @@ void* MemoryManager::AllocateMemory(size_t size)
         data->next = nullptr;
 
         head = data;
+       
         MemoryRem - data->size;
+        
         //returns if the head exists
         return data->location;
     }
     //temp packet that saves others
     MetaData* temp = head;
-
+    MetaData* prev = nullptr;
 
     //cycles to the end of the list
     while (temp->next != nullptr)
     {
+        
+
         //checks if there is space between 2 packets
         if (temp->next != nullptr)
         {
@@ -59,14 +61,25 @@ void* MemoryManager::AllocateMemory(size_t size)
                 //checks if the new packet will fit in said space
                 if (size < spaceleft) 
                 {
+                   
                     //slot the new packet into the space
-                    std::cout<< "spaceleft:" << spaceleft << "\n";       
-                    MetaData* data = (MetaData*)(temp + temp->size);
+                    //std::cout<< "spaceleft:" << spaceleft << "\n";      
+                    MetaData* data = (MetaData*)((size_t)temp + temp->size);
                     data->location = temp->location + temp->size;
                     data->size = size + MetaDataSize;
+                    
                     data->next = temp->next;
                     temp->next = data;
-                    MemoryRem = MemoryRem - data->size;
+                    if (data->next != nullptr)
+                    {
+                        if (data->next == data)
+                        {
+                            std::cout << " shits fucked";
+                        }
+                    }
+
+                    MemoryRem = MemoryRem - MetaDataSize;
+                    
              
                     return data->location;
                 }
@@ -80,13 +93,22 @@ void* MemoryManager::AllocateMemory(size_t size)
 
     MetaData* data = (MetaData*)(temp->location + temp->size - MetaDataSize);
 
-    //std::cout << "size+loc:" << (int)(temp->location + temp->size);
+   
     data->location = temp->location + temp->size;
     data->size = size + MetaDataSize;
     data->next = nullptr;
-    //sets next data 
     temp->next = data;
+    //sets next data 
+    if (prev != nullptr)
+    {
+        if (prev == data)
+        {
+            std::cout << " shits fucked";
+        }
+
+    }
     MemoryRem = MemoryRem - data->size;
+    
 
 
 
@@ -98,64 +120,51 @@ void MemoryManager::DeallocateMemory(void* del)
 {
     //grabs head
     MetaData* temp = head;
+    MetaData* prev = nullptr;
     //deallocate if mem is in head
-    if (del != nullptr)
+    if (del != nullptr && head != nullptr)
     {
         if (head->location == del) 
         {
             //cache head
             MetaData* todel = head;
-            std::cout << "DEALLOCATING MEMORY AT LOCATION:" << (void*)temp->location << "\n";
+            
             //set head to next value
             head = temp->next;
             //delete cached head
            
         }
-        else
-        {
+        else        {
             //checks if value to deallocate has been reached
             while (temp->next != nullptr)
-            {
+            {   
+                
+
+                if (prev == temp->next)
+                {
+                    std::cout << " shits fucked";
+                }
+                
+                //checks if the adress to deallocate has been reched
                 if (temp->next->location != del)
                 {
                     //sets temp to the next value
+                    prev = temp;
                     temp = temp->next;
                     continue;
                 }
                 //caches the value to deallocate
                 MetaData* todel = temp->next;
+                
                 MemoryRem = MemoryRem + temp->next->size;
                 //relinks the list
                 temp->next = temp->next->next;
-
-               
-
-              
                 return;
             }        
-                 
         }
     }
-    else 
+    else
     {
-        std::cout << "nothing to deallocate\n";
+        return;
     }
-}
-
-void MemoryManager::Output()
-{
-    //output (always last thing to do)
-    MetaData* temp = head;
-
-    if (head == nullptr)
-    {
-        std::cout << "ERROR:linked list is empty\n";
-    }
-    while (temp != nullptr)
-    {
-        std::cout << "\n\n";
-        std::cout << "Allocated Packet at Location:" << (void*)temp->location << "\n" << "size:" << temp->size << "\nRemaining memory:" << MemoryRem;
-        temp = temp->next;
-    }
-    std::cout << "\n\n";
 }

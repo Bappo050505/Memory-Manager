@@ -17,7 +17,7 @@ private:
 
 	MetaData* head = nullptr;
 	MetaData* tail = nullptr;
-	size_t MetaDataSize;
+	size_t MetaDataSize = sizeof(MetaData);
 	size_t MemoryRem;
 
 	void* address;
@@ -27,6 +27,6 @@ public:
 
 	void* AllocateMemory(size_t size);
 	void DeallocateMemory(void* del);
-	void Output();
+	
 };
 

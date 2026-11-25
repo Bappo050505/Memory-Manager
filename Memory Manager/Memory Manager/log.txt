@@ -1,0 +1,12 @@
+
+TESTING BASIC FUNCTIONALTY
+Time Elapsed For basic Value Test:32000
+
+TESTING INCORRECT VALUES
+Time Elapsed For incorrect Value Test:286100
+
+COMPLEX TYPE ALLOCATION TESTING
+Time Elapsed For Complex Value Test:5300
+
+STRESS TESTING ALLOCATE/DEALLOCATE
+Time Elapsed For stress Test:498100

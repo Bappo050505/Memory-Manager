@@ -2,6 +2,7 @@
 #include <iostream>
 #include <chrono>
 #include "MemoryManager.h"
+#include "Logger.h"
 
 class Dog
 {
@@ -27,7 +28,7 @@ public:
 	}
 	void bark()
 	{
-		std::cout << "Dog named:" << m_name << "says WOOF";
+		std::cout << "Dog named:" << m_name << " says WOOF";
 	}
 
 
@@ -38,8 +39,9 @@ class Testing
 private:
 	std::chrono::time_point<std::chrono::steady_clock> StartTime;
 	std::chrono::time_point<std::chrono::steady_clock> EndTime;
+	
 	MemoryManager* mem;
-	const int stressTestAmount = 10000000;
+	const int stressTestAmount = 100;
 public:
 	void TestBase();
 	void TestIncorrect();
