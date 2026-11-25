@@ -1,12 +1,32 @@
 
 TESTING BASIC FUNCTIONALTY
-Time Elapsed For basic Value Test:32000
+
+Allocated memory at address:0000028F83010958
+Allocated memory at address:0000028F83010974
+Allocated memory at address:0000028F830109F0
+DeAllocated memory at address:0000028F83010974
+Allocated memory at address:0000028F83010974
+Allocated memory at address:0000028F83010990
+DeAllocated memory at address:0000028F83010958
+DeAllocated memory at address:0000028F830109F0
+DeAllocated memory at address:0000028F83010974
+DeAllocated memory at address:0000028F83010990
+Time Elapsed For basic Value Test:10:milliseconds
 
 TESTING INCORRECT VALUES
-Time Elapsed For incorrect Value Test:286100
+
+Memory allocation failed, cant allocate negative amount of memory
+Memory allocation failed, out of bounds
+Can not allocate none existant memory
+Time Elapsed For incorrect Value Test:1:milliseconds
 
 COMPLEX TYPE ALLOCATION TESTING
-Time Elapsed For Complex Value Test:5300
+
+Allocating class at memory location:0000028F83010958
+Deallocating class at memory location:0000028F83010958
+Time Elapsed For Complex Value Test:2:milliseconds
 
 STRESS TESTING ALLOCATE/DEALLOCATE
-Time Elapsed For stress Test:498100
+
+stresstesting with :1000 random Allocations/Deallocations
+Time Elapsed For stress Test:0:seconds

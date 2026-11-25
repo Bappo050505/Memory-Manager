@@ -44,3 +44,15 @@ void Logger::logToConsole(std::string string)
 	std::cout << string;
 }
 
+void Logger::logToFile(std::string string, void* memloc)
+{
+	LogFile.open("log.txt", std::ios::app);
+	LogFile << string << memloc;
+	LogFile.close();
+}
+
+void Logger::logToConsole(std::string string, void* memloc)
+{
+	std::cout << string << memloc;
+}
+

@@ -70,13 +70,7 @@ void* MemoryManager::AllocateMemory(size_t size)
                     
                     data->next = temp->next;
                     temp->next = data;
-                    if (data->next != nullptr)
-                    {
-                        if (data->next == data)
-                        {
-                            std::cout << " shits fucked";
-                        }
-                    }
+                    
 
                     MemoryRem = MemoryRem - MetaDataSize;
                     
@@ -96,17 +90,10 @@ void* MemoryManager::AllocateMemory(size_t size)
    
     data->location = temp->location + temp->size;
     data->size = size + MetaDataSize;
+    //sets next data 
     data->next = nullptr;
     temp->next = data;
-    //sets next data 
-    if (prev != nullptr)
-    {
-        if (prev == data)
-        {
-            std::cout << " shits fucked";
-        }
-
-    }
+    
     MemoryRem = MemoryRem - data->size;
     
 
@@ -140,10 +127,7 @@ void MemoryManager::DeallocateMemory(void* del)
             {   
                 
 
-                if (prev == temp->next)
-                {
-                    std::cout << " shits fucked";
-                }
+               
                 
                 //checks if the adress to deallocate has been reched
                 if (temp->next->location != del)

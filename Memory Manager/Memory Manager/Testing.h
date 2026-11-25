@@ -41,7 +41,7 @@ private:
 	std::chrono::time_point<std::chrono::steady_clock> EndTime;
 	
 	MemoryManager* mem;
-	const int stressTestAmount = 100;
+	const int stressTestAmount = 1000000;
 public:
 	void TestBase();
 	void TestIncorrect();
